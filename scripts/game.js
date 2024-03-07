@@ -53,4 +53,22 @@ function addTurn() {
     game.currentGame.push(game.choices[(Math.floor(Math.random() * 4))]);
     showTurns();
 };
-module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns };
+
+function playerTurn() {
+    let i = game.playerMoves.length - 1;
+    if (game.currentGame[i] === game.playerMoves[i]) {
+        if (game.currentGame.length === game.playerMoves.length) {
+            game.score++;
+            showScore();
+            addTurn();
+        }
+    } else {
+        alert("Wrong move!");
+        newGame();
+    }
+}
+
+function showScore() {
+    document.getElementById("score").innerText = game.score;
+}
+module.exports = { game, playerTurn, newGame, showScore, addTurn, lightsOn, showTurns };
